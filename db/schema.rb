@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_27_164002) do
+ActiveRecord::Schema.define(version: 2021_06_03_020255) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -46,6 +46,19 @@ ActiveRecord::Schema.define(version: 2021_05_27_164002) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "jots", force: :cascade do |t|
+    t.integer "image_id", null: false
+    t.string "type"
+    t.string "title"
+    t.string "datetime"
+    t.string "location"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "accepted", default: false
+    t.index ["image_id"], name: "index_jots_on_image_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "jots", "images"
 end
