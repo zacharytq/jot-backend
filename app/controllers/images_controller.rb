@@ -1,3 +1,5 @@
+require 'oj'
+
 class ImagesController < ApplicationController
   before_action :set_image, only: [:show, :update, :destroy]
 
@@ -10,7 +12,8 @@ class ImagesController < ApplicationController
 
   # GET /images/1
   def show
-    render json: @image
+    thing = ImageSerializer.new(@image).serializable_hash
+    render json: thing
   end
 
   # POST /images
@@ -43,6 +46,8 @@ class ImagesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_image
       @image = Image.find(params[:id])
+      @image.image_url = url_for(@image.image)
+      @image
     end
 
     # Only allow a list of trusted parameters through.
