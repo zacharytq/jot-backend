@@ -48,9 +48,9 @@ ActiveRecord::Schema.define(version: 2021_06_05_033638) do
 
   create_table "jots", force: :cascade do |t|
     t.integer "image_id", null: false
-    t.string "type"
+    t.string "event_type"
     t.string "title"
-    t.string "datetime"
+    t.datetime "event_datetime"
     t.string "location"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

@@ -5,3 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+image = Image.first
+
+jot1 = image.jots.create(title: 'OBGYN', event_type: 'Event', event_datetime: '202106151030')
