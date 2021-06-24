@@ -2,12 +2,11 @@ require 'oj'
 
 class ImagesController < ApplicationController
   before_action :set_image, only: [:show, :update, :destroy]
+  before_action :url_for_images, only: [:index]
 
   # GET /images
   def index
-    @images = Image.all
-
-    render json: @images
+    render json: ImageSerializer.new(@images).serializable_hash.to_json
   end
 
   # GET /images/1
@@ -48,6 +47,14 @@ class ImagesController < ApplicationController
       @image = Image.find(params[:id])
       @image.image_url = url_for(@image.image)
       @image
+    end
+    
+    def url_for_images
+      @images = Image.all.select do |i|
+        i.image_url = url_for(i.image)
+        i
+      end
+      @images
     end
 
     # Only allow a list of trusted parameters through.
